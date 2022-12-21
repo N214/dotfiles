@@ -1,14 +1,19 @@
 - defaults:
     link:
       relink: true
+      create: true
 
 - clean: ['~']
 
 - link:
     ~/.zshrc:
-      #~/.oh-my-zsh:
+    ~/.oh-my-zsh: ohmyzsh
     ~/.tmux.conf:
       #~/.vimrc: vimrc
+
+- link:
+    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions:
+    ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting:
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
