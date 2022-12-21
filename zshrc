@@ -125,22 +125,42 @@ alias fzfcl="export FZF_DEFAULT_COMMAND='fd .'"
 # reinstate fzf custom options ('fzf-' as in 'cd -' as in 'back to where I was')
 alias fzf-="export FZF_DEFAULT_COMMAND='fd . $HOME'"
 
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/n214/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/n214/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/n214/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/n214/miniconda3/bin:$PATH"
-    fi
+# Export path if mac or linux
+if [ "$(uname -s)" = "Darwin" ]; then
+  do_mac_stuff() {
+    echo "Hi From Mac"
+  }
+
+  # homebrew path
+  export PATH="/usr/local/sbin:${PATH}"
+
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/Users/n214/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "/Users/n214/miniconda3/etc/profile.d/conda.sh" ]; then
+          . "/Users/n214/miniconda3/etc/profile.d/conda.sh"
+      else
+          export PATH="/Users/n214/miniconda3/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+  # <<< conda initialize <<<
+
+
+elif [ "$(uname -s)" = "Linux" ]; then
+  do_linux_stuff() {
+    echo "Hi from Linux"
+  }
+
+  # Python on Linux
+  export PATH="${HOME}/.local/bin:${PATH}"
 fi
-unset __conda_setup
-# <<< conda initialize <<<
+
+
 
 ######################################
 #               nnn                  #
