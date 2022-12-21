@@ -56,10 +56,8 @@ plugins=(
   git
   docker
   docker-compose
-  autojump
   sudo
   last-working-dir
-  chucknorris
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-fzf-history-search
