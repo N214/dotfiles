@@ -9,7 +9,7 @@
     ~/.zshrc: zshrc
     ~/.oh-my-zsh: ohmyzsh
     ~/.tmux.conf: tmux.conf
-      #~/.vimrc: vimrc
+    ~/.config/nvim:
 
 - link:
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions:
@@ -29,6 +29,7 @@
       if [ "$(uname -s)" = "Linux" ]; then
         sudo apt-get update
         sudo apt-get install -y $(cat apt/packages.txt)
+        nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
       fi
     stdout: true
     stdin: true
