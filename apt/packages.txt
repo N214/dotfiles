@@ -1,5 +1,4 @@
-neovim
+vim
 python3-neovim
 fzf
 fd
-
