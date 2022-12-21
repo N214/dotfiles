@@ -6,14 +6,15 @@
 - clean: ['~']
 
 - link:
-    ~/.zshrc:
+    ~/.zshrc: zshrc
     ~/.oh-my-zsh: ohmyzsh
-    ~/.tmux.conf:
+    ~/.tmux.conf: tmux.conf
       #~/.vimrc: vimrc
 
 - link:
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions:
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting:
+    ~/.oh-my-zsh/custom/plugins/zsh-fzf-history-search:
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
