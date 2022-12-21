@@ -13,3 +13,6 @@
 [submodule "zsh-autosuggestions"]
 	path = zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "zsh-fzf-history-search"]
+	path = zsh-fzf-history-search
+	url = git@github.com:joshskidmore/zsh-fzf-history-search.git
