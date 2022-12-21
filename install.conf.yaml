@@ -28,7 +28,11 @@
     command: |
       if [ "$(uname -s)" = "Linux" ]; then
         sudo apt-get update
+        # Install linux package
         sudo apt-get install -y $(cat apt/packages.txt)
+        # Install nvim plugin manager Packer 
+        git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+        # From Packer install Neovim packages
         nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
       fi
     stdout: true
