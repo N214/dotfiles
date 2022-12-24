@@ -19,11 +19,10 @@
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
 
-# change defaults and link all the Mac stuff
+# Install Linux dependencies
 - defaults:
     link:
       if: '[ "$(uname -s)" = "Linux" ]'
-
 - link:
     ~/.vimrc: vimrc
 - shell:
@@ -37,6 +36,28 @@
         #git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
         # From Packer install Neovim packages
         #nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+      fi
+    stdout: true
+    stdin: true
+
+# Install Mac OS dependencies
+- defaults:
+    link:
+      if: '[ "$(uname -s)" = "Darwin" ]'
+    brewfile:
+      stdout: false
+      stderr: false
+      include: ['tap', 'brew', 'cask']
+        #include: ['tap', 'brew', 'cask', 'mas']
+- link:
+    ~/.config/homebrew/Brewfile: Brewfile
+- brewfile:
+    file: Brewfile
+- shell:
+  - description: Install brewfiles
+    command: |
+      if [ "$(uname -s)" = "Darwin" ]; then
+        xcode-select --install
       fi
     stdout: true
     stdin: true
