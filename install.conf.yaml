@@ -45,8 +45,8 @@
     link:
       if: '[ "$(uname -s)" = "Darwin" ]'
     brewfile:
-      stdout: false
-      stderr: false
+      stdout: true
+      stderr: true
       include: ['tap', 'brew', 'cask']
         #include: ['tap', 'brew', 'cask', 'mas']
 - link:
