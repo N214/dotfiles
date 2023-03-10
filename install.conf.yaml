@@ -9,7 +9,7 @@
     ~/.zshrc: zshrc
     ~/.oh-my-zsh: ohmyzsh
     ~/.tmux.conf: tmux.conf
-      #~/.config/nvim:
+    ~/.config/nvim:
 
 - link:
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions:
@@ -57,7 +57,7 @@
   - description: Install brewfiles
     command: |
       if [ "$(uname -s)" = "Darwin" ]; then
-        xcode-select --install
+        echo $SHELL
       fi
     stdout: true
     stdin: true

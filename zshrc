@@ -1,4 +1,6 @@
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export AWS_PAGER=""
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -134,22 +136,24 @@ if [ "$(uname -s)" = "Darwin" ]; then
 
   # homebrew path
   export PATH="/usr/local/sbin:${PATH}"
+  export PATH="/opt/homebrew/bin:${PATH}"
+  export PATH="/Users/$USER/miniconda3/bin:${PATH}"
 
   # >>> conda initialize >>>
   # !! Contents within this block are managed by 'conda init' !!
-  __conda_setup="$('/Users/n214/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  __conda_setup="$('/Users/${USER}/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
   if [ $? -eq 0 ]; then
       eval "$__conda_setup"
+      export CONDA_AUTO_ACTIVATE_BASE=true
   else
-      if [ -f "/Users/n214/miniconda3/etc/profile.d/conda.sh" ]; then
-          . "/Users/n214/miniconda3/etc/profile.d/conda.sh"
+      if [ -f "/Users/${USER}/miniconda3/etc/profile.d/conda.sh" ]; then
+          . "/Users/${USER}/miniconda3/etc/profile.d/conda.sh"
       else
-          export PATH="/Users/n214/miniconda3/bin:$PATH"
+          export PATH="/Users/${USER}miniconda3/bin:$PATH"
       fi
   fi
   unset __conda_setup
   # <<< conda initialize <<<
-
 
 elif [ "$(uname -s)" = "Linux" ]; then
   do_linux_stuff() {
@@ -167,7 +171,7 @@ fi
 ######################################
 
 export VISUAL=ewrap
-export NNN_OPENER="/home/$USER/.config/nnn/plugins/nuke"
+export NNN_OPENER="/home/${USER}/.config/nnn/plugins/nuke"
 export NNN_SSHFS_OPTS='sshfs -o reconnect,idmap=user,cache_timeout=3600'
 export NNN_BMS="c:$HOME/BD/Carrefour/;h:$HOME;d:$HOME/Downloads/"
 export GUI=1
@@ -214,9 +218,9 @@ n ()
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND="fd -d 10 -pai -HL . $HOME"
-#export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
+export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 #export FZF_
-#export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_COMPLETION_OPTS='+c -x'
 
@@ -310,3 +314,9 @@ f() {
     eval "$cmd"
 
     }
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/{$USER}/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/{$USER}/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/{$USER}/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/{$USER}/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
