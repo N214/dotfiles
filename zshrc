@@ -1,6 +1,9 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export AWS_PAGER=""
+# LS_COLORS for vivid, need vivid installed
+export LS_COLORS="$(vivid -m 8-bit generate molokai)"
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
