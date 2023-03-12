@@ -74,8 +74,8 @@ require("mason-lspconfig").setup {
 			"bashls",
 			"gopls",
 			"jsonls",
-      		"tflint",
-      		"yamlls"
+      "tflint",
+      "yamlls"
 		}
 	}
 EOF
@@ -90,7 +90,7 @@ lua vim.g.gruvbox_flat_style = 'hard'  -- Config need to be set before loading c
 lua vim.cmd[[colorscheme gruvbox-flat]]
 
 " Snippets
-imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+" imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
 inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
 snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
 snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>

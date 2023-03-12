@@ -103,6 +103,7 @@ alias nz="nvim ~/.zshrc"
 alias nn="nvim ~/.config/nvim/init.vim"
 #alias n="nnn -e"
 alias nv=nvim
+alias ls="gls --color"
 alias sz="source ~/.zshrc && echo 'zshrc sourced'"
 alias d=docker
 alias k=kubectl
@@ -165,6 +166,14 @@ elif [ "$(uname -s)" = "Linux" ]; then
 fi
 
 
+######################################
+#               go                   #
+######################################
+
+export GOPATH=$(go env GOPATH)
+export GOROOT=$(go env GOROOT)
+export PATH=$PATH:$(go env GOPATH)/bin
+export PATH=$PATH:$(go env GOROOT)/bin
 
 ######################################
 #               nnn                  #
