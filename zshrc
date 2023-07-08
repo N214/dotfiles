@@ -173,10 +173,8 @@ fi
 #               go                   #
 ######################################
 
-export GOPATH=$(go env GOPATH)
-export GOROOT=$(go env GOROOT)
-export PATH=$PATH:$(go env GOPATH)/bin
-export PATH=$PATH:$(go env GOROOT)/bin
+export GOPATH="${HOME}/go"
+export GOROOT="$(brew --prefix golang)/libexec"
 
 ######################################
 #               nnn                  #
@@ -328,7 +326,7 @@ f() {
     }
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/$USER/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/$USER/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "/Users/${USER}/downloadgoogle-cloud-sdk/path.zsh.inc" ]; then . "/Users/${USER}/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/$USER/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/$USER/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "/Users/${USER}/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/${USER}/google-cloud-sdk/completion.zsh.inc"; fi
