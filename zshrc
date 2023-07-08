@@ -52,7 +52,7 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load?
 
-RPROMPT="%{$fg[white]%}[%D{%f/%m/%y}|%@]"
+#RPROMPT="%{$fg[white]%}[%D{%f/%m/%y}|%@]"
 plugins=(
   git
   docker
@@ -63,6 +63,7 @@ plugins=(
   zsh-syntax-highlighting
   zsh-fzf-history-search
   kubectl
+  virtualenv
   #tmux
   )
 
