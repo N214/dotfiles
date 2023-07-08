@@ -1,17 +1,13 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export AWS_PAGER=""
-# LS_COLORS for vivid, need vivid installed
-export LS_COLORS="$(vivid -m 8-bit generate molokai)"
+# add pg utils to path without installing the whole pg
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="robbyrussell"
-
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+ZSH_THEME="amuse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -83,7 +79,7 @@ autoload -U compinit && compinit -u
 
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+#export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -95,24 +91,19 @@ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
+# aliases
 alias nz="nvim ~/.zshrc"
 alias nn="nvim ~/.config/nvim/init.vim"
-#alias n="nnn -e"
 alias nv=nvim
 alias ls="gls --color"
+alias nodev="/opt/homebrew/bin/n"
 alias sz="source ~/.zshrc && echo 'zshrc sourced'"
 alias d=docker
 alias k=kubectl
 alias t="tmux -2"
 alias ta="tmux -2 a"
 alias r="ranger"
+alias rg="rg --vimgrep --color ansi"
 alias sr="sudo ranger"
 alias mkd="mkdir -pv"
 alias nt="nvim ~/.tmux.conf"
@@ -168,6 +159,9 @@ elif [ "$(uname -s)" = "Linux" ]; then
   export PATH="${HOME}/.local/bin:${PATH}"
 fi
 
+
+# LS_COLORS for vivid, need vivid installed
+export LS_COLORS="$(vivid -m 8-bit generate molokai)"
 
 ######################################
 #               go                   #
@@ -237,20 +231,19 @@ export FZF_COMPLETION_OPTS='+c -x'
 
 # Open a file with emc
 #open_with_fzf() { fd -t f -H -I -E .git/ -E node_modules/ | fzf -m --preview="xdg-mime query default {}" | xargs -ro emacsclient --create-frame -n 2>/dev/null }
-open_with_fzf() { fd -t f -H -I -E .git/ -E node_modules/ | fzf -m --preview="xdg-mime query default {}" | xargs xdg-mime query default }
+open_with_fzf() { fd -t f -H -I -E .git/ -E node_modules/ | fzf -m --preview="bat  --style=numbers --color=always {}" | xargs nvim }
 
 # Quick cd
 cd_with_fzf() {
     cd $HOME && cd "$(fd -t d -E .git/ -E node_modules/ | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window right )"
 }
 
-fv() {du -a ~/Dropbox/* | awk '{print $2}' | fzf | xargs -r nvim;}
+# Clean
+fv() {du -a . | awk '{ print $2 }' | fzf | xargs -r nvim;}
+fh() {du -a ~/* | awk '{ print $2 }' | fzf | xargs -r nvim;}
 
-# fC() {du -a ~/Downloads ~/.config/* | awk '{print $2}' | fzf | xargs -r nvim;}
-
-fh() {du -a ~/* | awk '{print $2}' | fzf | xargs -r nvim;}
-C() {cp -v "$1" "$(du -a ~/Dropbox/* | awk '{print $2}' | fzf | sed "s|~|$HOME|")" ;}
-R() {rm -rfv "$(du -a ~/Dropbox/* ~/Downloads | awk '{print $2}' | fzf | sed "s|~|$HOME|")" ;}
+C() {cp -v "$1" "$( du -a ~/Dropbox/* | awk '{ print $2 }' | fzf | sed "s|~|$HOME|")" ;}
+R() {rm -rfv "$( du -a ~/Dropbox/* ~/Downloads | awk '{ print $2 }' | fzf | sed "s|~|$HOME|")" ;}
 
 
 zle -N cd_with_fzf
@@ -326,7 +319,23 @@ f() {
     }
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f "/Users/${USER}/downloadgoogle-cloud-sdk/path.zsh.inc" ]; then . "/Users/${USER}/google-cloud-sdk/path.zsh.inc"; fi
+if [ -f "/Users/${USER}/google-cloud-sdk/path.zsh.inc" ]; then . "/Users/${USER}/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f "/Users/${USER}/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/${USER}/google-cloud-sdk/completion.zsh.inc"; fi
+
+# pnpm
+export PNPM_HOME="/Users/nicolasyu-weitang/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+# NVM 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# direnv
+eval "$(direnv hook zsh)"
+
