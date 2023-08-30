@@ -30,7 +30,6 @@
   - description: apt-get install
     command: |
       if [ "$(uname -s)" = "Linux" ]; then
-        sudo apt-get update
         # Install linux package
         if [ "$(whoami)" = "root" ]; then   apt install -y <apt/packages.txt; else   sudo apt install <apt/packages.txt; fi
         # Install nvim plugin manager Packer 
