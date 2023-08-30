@@ -194,6 +194,13 @@ n ()
     #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
     export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
     # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+        # This will create a fifo where all nnn selections will be written to
+    NNN_FIFO="$(mktemp -u)"
+    export NNN_FIFO
+    (umask 077; mkfifo "$NNN_FIFO")
+
+    preview_cmd="${HOME}/.config/nnn/preview.sh"
+    # Use `tmux` split as preview
     # stty start undef
     # stty stop undef
     # stty lwrap undef
@@ -208,12 +215,18 @@ n ()
     export GUI=1
     export NNN_COLORS='#55555555'
 
+    if [ -e "${TMUX%%,*}" ]; then
+        tmux split-window -e "NNN_FIFO=$NNN_FIFO" -dh "$preview_cmd"
+    else
+        echo "unable to open preview, please install tmux or xterm"
+    fi
     nnn -deEFnQruxPa "$@"
 
     if [ -f "$NNN_TMPFILE" ]; then
             . "$NNN_TMPFILE"
             rm -f "$NNN_TMPFILE" > /dev/null
     fi
+    rm -f "$NNN_FIFO"
 }
 
 

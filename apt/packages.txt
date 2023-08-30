@@ -2,3 +2,6 @@ vim
 python3-neovim
 fzf
 fd
+bat
+nnn
+ranger
