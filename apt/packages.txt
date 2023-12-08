@@ -1,7 +1,10 @@
 vim
 python3-neovim
 fzf
-fd
+fd-find
+ripgrep
 bat
-nnn
 ranger
+gcc
+golang
+software-properties-common

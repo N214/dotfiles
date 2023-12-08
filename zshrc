@@ -353,3 +353,10 @@ export NVM_DIR="$HOME/.nvm"
 # direnv
 eval "$(direnv hook zsh)"
 
+
+# bun completions
+[ -s "/Users/n214/.bun/_bun" ] && source "/Users/n214/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

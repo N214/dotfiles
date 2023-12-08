@@ -32,8 +32,6 @@
       if [ "$(uname -s)" = "Linux" ]; then
         # Install linux package
         if [ "$(whoami)" = "root" ]; then   apt install -y <apt/packages.txt; else   sudo apt install <apt/packages.txt; fi
-        # Install nvim plugin manager Packer 
-        git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
         # From Packer install Neovim packages
         nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
       fi
