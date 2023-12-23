@@ -4,55 +4,85 @@ export AWS_PAGER=""
 # add pg utils to path without installing the whole pg
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
+# OS specific config
+case "$OSTYPE" in
+  darwin*)
+    alias ls="gls --color"
+    alias nodev="/opt/homebrew/bin/n"
 
-# Path to your oh-my-zsh installation.
+    # homebrew path
+    export PATH="/usr/local/sbin:${PATH}"
+    export PATH="/opt/homebrew/bin:${PATH}"
+    export PATH="/Users/$USER/miniconda3/bin:${PATH}"
+
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/Users/${USER}/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+        export CONDA_AUTO_ACTIVATE_BASE=true
+    else
+        if [ -f "/Users/${USER}/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "/Users/${USER}/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/Users/${USER}miniconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+
+    # autojump config
+
+    [[ -s /Users/n214/.autojump/etc/profile.d/autojump.sh ]] && source /Users/n214/.autojump/etc/profile.d/autojump.sh
+    autoload -U compinit && compinit -u
+
+    ######################################
+    #               go                   #
+    ######################################
+
+    export GOPATH="${HOME}/go"
+    export GOROOT="$(brew --prefix golang)/libexec"
+
+    # Google Cloud SDK.
+    if [ -f "/Users/${USER}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "/Users/${USER}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
+    if [ -f "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
+
+    # pnpm
+    export PNPM_HOME="/Users/nicolasyu-weitang/Library/pnpm"
+    case ":$PATH:" in
+      *":$PNPM_HOME:"*) ;;
+      *) export PATH="$PNPM_HOME:$PATH" ;;
+    esac
+    # pnpm end
+    # NVM 
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+    # direnv
+    eval "$(direnv hook zsh)"
+
+    # bun completions
+    [ -s "/Users/n214/.bun/_bun" ] && source "/Users/n214/.bun/_bun"
+
+    # bun
+    export BUN_INSTALL="$HOME/.bun"
+    export PATH="$BUN_INSTALL/bin:$PATH"
+
+  ;;
+  linux*)
+    alias ls="ls --color"
+  ;;
+esac
+
+# ZSH config
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="amuse"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="false"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
 COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-
-#RPROMPT="%{$fg[white]%}[%D{%f/%m/%y}|%@]"
 plugins=(
   git
   docker
@@ -69,18 +99,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# autojump config
-
-[[ -s /Users/n214/.autojump/etc/profile.d/autojump.sh ]] && source /Users/n214/.autojump/etc/profile.d/autojump.sh
-autoload -U compinit && compinit -u
-
-# Antigen config
-#source ~/.antigen.zsh
-#antigen bundle thewtex/tmux-mem-cpu-load
-
 
 # You may need to manually set your language environment
-#export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -90,14 +111,10 @@ else
 fi
 
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
 # aliases
 alias nz="nvim ~/.zshrc"
 alias nn="nvim ~/.config/nvim/init.vim"
 alias nv=nvim
-alias ls="gls --color"
-alias nodev="/opt/homebrew/bin/n"
 alias sz="source ~/.zshrc && echo 'zshrc sourced'"
 alias d=docker
 alias k=kubectl
@@ -116,60 +133,12 @@ alias kd="kubectl describe"
 alias ka="kubectl apply -f"
 alias kg="kubectl get"
 alias tf="terraform"
-
-# restore fzf default options ('fzf clear')
-alias fzfcl="export FZF_DEFAULT_COMMAND='fd .'"
-
-# reinstate fzf custom options ('fzf-' as in 'cd -' as in 'back to where I was')
-alias fzf-="export FZF_DEFAULT_COMMAND='fd . $HOME'"
-
-
-# Export path if mac or linux
-if [ "$(uname -s)" = "Darwin" ]; then
-  do_mac_stuff() {
-    echo "Hi From Mac"
-  }
-
-  # homebrew path
-  export PATH="/usr/local/sbin:${PATH}"
-  export PATH="/opt/homebrew/bin:${PATH}"
-  export PATH="/Users/$USER/miniconda3/bin:${PATH}"
-
-  # >>> conda initialize >>>
-  # !! Contents within this block are managed by 'conda init' !!
-  __conda_setup="$('/Users/${USER}/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-  if [ $? -eq 0 ]; then
-      eval "$__conda_setup"
-      export CONDA_AUTO_ACTIVATE_BASE=true
-  else
-      if [ -f "/Users/${USER}/miniconda3/etc/profile.d/conda.sh" ]; then
-          . "/Users/${USER}/miniconda3/etc/profile.d/conda.sh"
-      else
-          export PATH="/Users/${USER}miniconda3/bin:$PATH"
-      fi
-  fi
-  unset __conda_setup
-  # <<< conda initialize <<<
-
-elif [ "$(uname -s)" = "Linux" ]; then
-  do_linux_stuff() {
-    echo "Hi from Linux"
-  }
-
-  # Python on Linux
-  export PATH="${HOME}/.local/bin:${PATH}"
-fi
-
+alias fzfcl="export FZF_DEFAULT_COMMAND='fd .'"   # restore fzf default options ('fzf clear')
+alias fzf-="export FZF_DEFAULT_COMMAND='fd . $HOME'"   # reinstate fzf custom options ('fzf-' as in 'cd -' as in 'back to where I was')
 
 # LS_COLORS for vivid, need vivid installed
 export LS_COLORS="$(vivid -m 8-bit generate molokai)"
 
-######################################
-#               go                   #
-######################################
-
-export GOPATH="${HOME}/go"
-export GOROOT="$(brew --prefix golang)/libexec"
 
 ######################################
 #               nnn                  #
@@ -329,34 +298,4 @@ f() {
 
     cmd="$program $options $arguments"
     eval "$cmd"
-
-    }
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "/Users/${USER}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "/Users/${USER}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
-
-# pnpm
-export PNPM_HOME="/Users/nicolasyu-weitang/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-# NVM 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-# direnv
-eval "$(direnv hook zsh)"
-
-
-# bun completions
-[ -s "/Users/n214/.bun/_bun" ] && source "/Users/n214/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+}
