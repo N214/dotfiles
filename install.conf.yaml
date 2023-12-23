@@ -9,7 +9,7 @@
     ~/.zshrc: zshrc
     ~/.oh-my-zsh: ohmyzsh
     ~/.tmux.conf: tmux.conf
-    ~/.config/nnn: config/nnn/
+    #~/.config/nnn: config/nnn/
     ~/.config/nvim:
 
 - link:
@@ -24,16 +24,18 @@
 - defaults:
     link:
       if: '[ "$(uname -s)" = "Linux" ]'
-- link:
-    ~/.vimrc: vimrc
+#- link:
+#    ~/.vimrc: vimrc
 - shell:
-  - description: apt-get install
+  - description: install packages
     command: |
-      if [ "$(uname -s)" = "Linux" ]; then
+      if [ "$(uname -a | awk -F ' ' '{print $2}')" = "ubuntu" ]; then
         # Install linux package
         if [ "$(whoami)" = "root" ]; then   apt install -y <apt/packages.txt; else   sudo apt install <apt/packages.txt; fi
         # From Packer install Neovim packages
-        nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+        # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+      elif [ "$(uname -a | awk -F ' ' '{print $2}')" = "fedora" ]; then 
+        cat dnf/packages.txt | xargs dnf install -y
       fi
     stdout: true
     stdin: true
@@ -46,16 +48,15 @@
       stdout: true
       stderr: true
       include: ['tap', 'brew', 'cask']
-        #include: ['tap', 'brew', 'cask', 'mas']
 - link:
     ~/.config/homebrew/Brewfile: Brewfile
-- brewfile:
-    file: Brewfile
 - shell:
   - description: Install brewfiles
+    if: '[[ "$(uname)" == "Darwin" ]]'
     command: |
       if [ "$(uname -s)" = "Darwin" ]; then
-        echo $SHELL
+        echo "MAC OS"
+        brew bundle --file=Brewfile
       fi
     stdout: true
     stdin: true
