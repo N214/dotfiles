@@ -1,0 +1,10 @@
+neovim
+chromium
+python3-neovim
+fzf
+fd-find
+ripgrep
+bat
+ranger
+gcc
+golang
