@@ -20,27 +20,14 @@
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
 
-# Install Linux dependencies
+# Linux
 - defaults:
     link:
       if: '[ "$(uname -s)" = "Linux" ]'
-#- link:
-#    ~/.vimrc: vimrc
-- shell:
-  - description: install packages
-    command: |
-      if [ "$(uname -a | awk -F ' ' '{print $2}')" = "ubuntu" ]; then
-        # Install linux package
-        if [ "$(whoami)" = "root" ]; then   apt install -y <apt/packages.txt; else   sudo apt install <apt/packages.txt; fi
-        # From Packer install Neovim packages
-        # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-      elif [ "$(uname -a | awk -F ' ' '{print $2}')" = "fedora" ]; then 
-        cat dnf/packages.txt | xargs dnf install -y
-      fi
-    stdout: true
-    stdin: true
+- link:
+    ~/.vimrc: vimrc
 
-# Install Mac OS dependencies
+# Mac OS
 - defaults:
     link:
       if: '[ "$(uname -s)" = "Darwin" ]'
@@ -50,13 +37,20 @@
       include: ['tap', 'brew', 'cask']
 - link:
     ~/.config/homebrew/Brewfile: Brewfile
+
 - shell:
-  - description: Install brewfiles
-    if: '[[ "$(uname)" == "Darwin" ]]'
+  - description: Install package depending on the os type
     command: |
       if [ "$(uname -s)" = "Darwin" ]; then
         echo "MAC OS"
         brew bundle --file=Brewfile
+      elif [ "$(uname -a | awk -F ' ' '{print $2}')" = "ubuntu" ]; then
+        # Install linux package
+        if [ "$(whoami)" = "root" ]; then   apt install -y <apt/packages.txt; else   sudo apt install <apt/packages.txt; fi
+        # From Packer install Neovim packages
+        # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+      elif [ "$(uname -a | awk -F ' ' '{print $2}')" = "fedora" ]; then 
+        cat dnf/packages.txt | xargs dnf install -y
       fi
     stdout: true
     stdin: true

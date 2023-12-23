@@ -48,7 +48,7 @@ case "$OSTYPE" in
     if [ -f "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
 
     # pnpm
-    export PNPM_HOME="/Users/nicolasyu-weitang/Library/pnpm"
+    export PNPM_HOME="${HOME}/Library/pnpm"
     case ":$PATH:" in
       *":$PNPM_HOME:"*) ;;
       *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -72,12 +72,20 @@ case "$OSTYPE" in
   ;;
   linux*)
     alias ls="ls --color"
+    # pnpm
+    export PNPM_HOME="${HOME}/.local/share/pnpm"
+    case ":$PATH:" in
+      *":$PNPM_HOME:"*) ;;
+      *) export PATH="$PNPM_HOME:$PATH" ;;
+    esac
+    # pnpm end
+
   ;;
 esac
 
 # ZSH config
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="amuse"
+ZSH_THEME=""
 
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
@@ -299,3 +307,4 @@ f() {
     cmd="$program $options $arguments"
     eval "$cmd"
 }
+

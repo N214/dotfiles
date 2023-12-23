@@ -8,3 +8,5 @@ bat
 ranger
 gcc
 golang
+zsh
+tmux
