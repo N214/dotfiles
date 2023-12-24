@@ -1,7 +1,7 @@
 # dotfiles
 
 ## Todo
-Need to install vivid, (vim)
+Need to install vivid, python, (vim)
 
 ## Installation process
 ```sh

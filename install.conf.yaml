@@ -17,8 +17,8 @@
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting:
     ~/.oh-my-zsh/custom/plugins/zsh-fzf-history-search:
 
-- shell:
-  - [git submodule update --init --recursive, Installing submodules]
+#- shell:
+#  - [git submodule update --init --recursive, Installing submodules]
 
 # Linux
 - defaults:
@@ -46,7 +46,8 @@
         brew bundle --file=Brewfile
       elif [ "$(uname -a | awk -F ' ' '{print $2}')" = "ubuntu" ]; then
         # Install linux package
-        if [ "$(whoami)" = "root" ]; then   apt install -y <apt/packages.txt; else   sudo apt install <apt/packages.txt; fi
+        #if [ "$(whoami)" = "root" ]; then   apt install -y <apt/packages.txt; else   sudo apt install <apt/packages.txt; fi
+        cat apt/packages.txt | xargs apt install -y
         # From Packer install Neovim packages
         # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
       elif [ "$(uname -a | awk -F ' ' '{print $2}')" = "fedora" ]; then 
