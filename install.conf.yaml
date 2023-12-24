@@ -35,11 +35,11 @@
 - link:
     ~/.config/homebrew/Brewfile: Brewfile
 
+# Install packages
 - shell:
-  - description: Install package depending on the os type
+  - description: Install packages depending on the OS type
     command: |
       if [ "$(uname -s)" = "Darwin" ]; then
-        echo "MAC OS"
         brew bundle --file=Brewfile
       elif cat /etc/os-release | grep -q "Ubuntu"; then
         cat apt/packages.txt | xargs apt install -y

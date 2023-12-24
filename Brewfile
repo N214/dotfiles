@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "rcmdnk/file"
+brew "gls"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # GNU File, Shell, and Text utilities
@@ -40,14 +41,10 @@ brew "ngrep"
 brew "nnn", link: false
 # Platform built on V8 to build network applications
 brew "node"
-# Platform built on V8 to build network applications
-brew "node@18"
 # Command-line tools for MySQL, MariaDB and system tasks
 brew "percona-toolkit"
 # Pretty system information tool written in POSIX sh
 brew "pfetch"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.10"
 # File browser
 brew "ranger"
 # Rsync for cloud storage
@@ -62,35 +59,14 @@ brew "tree"
 brew "viu"
 # Generator for LS_COLORS with support for multiple color themes
 brew "vivid"
+brew "zsh"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
 # Brewfile manager for Homebrew.
 brew "rcmdnk/file/brew-file"
-# Automated testing of webapps for Google Chrome
-cask "chromedriver"
-# GPU-based terminal emulator
-cask "kitty"
 # Clipboard manager
 cask "maccy"
 # File system integration
 cask "macfuse"
 # Multimedia player
 cask "vlc"
-# Rust-based terminal
-cask "warp"
-mas "AdGuard for Safari", id: 1440147259
-mas "Connective Plugin", id: 1428740565
-mas "eidReader", id: 1190651975
-mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
-mas "Keynote", id: 409183694
-mas "Microsoft Excel", id: 462058435
-mas "Microsoft Outlook", id: 985367838
-mas "Microsoft PowerPoint", id: 462062816
-mas "Microsoft Remote Desktop", id: 1295203466
-mas "Microsoft Word", id: 462054704
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "The Unarchiver", id: 425424353
-mas "Vimari", id: 1480933944
-mas "WeChat", id: 836500024
