@@ -1,0 +1,5 @@
+FROM fedora:latest
+
+RUN dnf install -y python git
+RUN git clone --recurse-submodules -j8 https://github.com/N214/dotfiles.git
+RUN cd dotfiles && ./install

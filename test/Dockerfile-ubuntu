@@ -1,0 +1,6 @@
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get install -y git python3
+RUN git clone --recurse-submodules -j8 https://github.com/N214/dotfiles.git
+RUN cd dotfiles && ./install
