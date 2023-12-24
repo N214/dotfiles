@@ -15,7 +15,7 @@
 	url = https://github.com/zsh-users/zsh-autosuggestions
 [submodule "zsh-fzf-history-search"]
 	path = zsh-fzf-history-search
-	url = git@github.com:joshskidmore/zsh-fzf-history-search.git
+	url = https://github.com/joshskidmore/zsh-fzf-history-search.git
 [submodule "dotbot-brewfile"]
 	path = dotbot-brewfile
 	url = https://github.com/sobolevn/dotbot-brewfile.git
