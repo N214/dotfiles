@@ -17,9 +17,6 @@
     ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting:
     ~/.oh-my-zsh/custom/plugins/zsh-fzf-history-search:
 
-#- shell:
-#  - [git submodule update --init --recursive, Installing submodules]
-
 # Linux
 - defaults:
     link:
