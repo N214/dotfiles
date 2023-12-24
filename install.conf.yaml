@@ -45,11 +45,9 @@
         echo "MAC OS"
         brew bundle --file=Brewfile
       elif cat /etc/os-release | grep -q "Ubuntu"; then
-        #if [ "$(whoami)" = "root" ]; then   apt install -y <apt/packages.txt; else   sudo apt install <apt/packages.txt; fi
         cat apt/packages.txt | xargs apt install -y
-        # From Packer install Neovim packages
         # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-      elif [ "$(uname -a | awk -F ' ' '{print $2}')" = "fedora" ]; then 
+      elif cat /etc/os-release | grep -q "Fedora"; then
         cat dnf/packages.txt | xargs dnf install -y
       fi
     stdout: true
