@@ -44,7 +44,8 @@
       if [ "$(uname -s)" = "Darwin" ]; then
         echo "MAC OS"
         brew bundle --file=Brewfile
-      elif [ "$(uname -a | awk -F ' ' '{print $2}')" = "ubuntu" ]; then
+      #elif [ "$(uname -a | awk -F ' ' '{print $2}')" = "ubuntu" ]; then
+      elif cat /etc/os-release | grep -q "Fedora"; then
         # Install linux package
         #if [ "$(whoami)" = "root" ]; then   apt install -y <apt/packages.txt; else   sudo apt install <apt/packages.txt; fi
         cat apt/packages.txt | xargs apt install -y
