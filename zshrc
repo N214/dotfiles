@@ -1,8 +1,6 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export AWS_PAGER=""
-# add pg utils to path without installing the whole pg
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # OS specific config
 case "$OSTYPE" in
@@ -14,6 +12,7 @@ case "$OSTYPE" in
     export PATH="/usr/local/sbin:${PATH}"
     export PATH="/opt/homebrew/bin:${PATH}"
     export PATH="/Users/$USER/miniconda3/bin:${PATH}"
+    export PATH="/opt/homebrew/opt/libpq/bin:$PATH"  #after installing pg utils
 
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
@@ -48,7 +47,7 @@ case "$OSTYPE" in
     if [ -f "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
 
     # pnpm
-    export PNPM_HOME="${HOME}/Library/pnpm"
+    export PNPM_HOME="/Users/nicolasyu-weitang/Library/pnpm"
     case ":$PATH:" in
       *":$PNPM_HOME:"*) ;;
       *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -72,20 +71,12 @@ case "$OSTYPE" in
   ;;
   linux*)
     alias ls="ls --color"
-    # pnpm
-    export PNPM_HOME="${HOME}/.local/share/pnpm"
-    case ":$PATH:" in
-      *":$PNPM_HOME:"*) ;;
-      *) export PATH="$PNPM_HOME:$PATH" ;;
-    esac
-    # pnpm end
-
   ;;
 esac
 
 # ZSH config
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME=""
+ZSH_THEME="amuse"
 
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
@@ -307,4 +298,3 @@ f() {
     cmd="$program $options $arguments"
     eval "$cmd"
 }
-
