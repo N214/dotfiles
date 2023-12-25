@@ -71,12 +71,19 @@ case "$OSTYPE" in
   ;;
   linux*)
     alias ls="ls --color"
+
+    # Google Cloud SDK.
+    if [ -f "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
+    if [ -f "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
   ;;
 esac
 
 # ZSH config
+# Theme
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="amuse"
+ZSH_THEME=""
+autoload -U promptinit; promptinit
+prompt pure #load theme pure
 
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
@@ -93,6 +100,7 @@ plugins=(
   zsh-fzf-history-search
   kubectl
   virtualenv
+  gcloud
   #tmux
   )
 
