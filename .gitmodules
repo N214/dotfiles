@@ -1,21 +1,28 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
+	ignore = dirty
 [submodule "ohmyzsh"]
 	path = ohmyzsh
 	url = https://github.com/ohmyzsh/ohmyzsh
+	ignore = dirty
 [submodule "tpm"]
 	path = tpm
 	url = https://github.com/tmux-plugins/tpm
+	ignore = dirty
 [submodule "zsh-syntax-highlighting"]
 	path = zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+	ignore = dirty
 [submodule "zsh-autosuggestions"]
 	path = zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+	ignore = dirty
 [submodule "zsh-fzf-history-search"]
 	path = zsh-fzf-history-search
 	url = https://github.com/joshskidmore/zsh-fzf-history-search.git
+	ignore = dirty
 [submodule "dotbot-brewfile"]
 	path = dotbot-brewfile
 	url = https://github.com/sobolevn/dotbot-brewfile.git
+	ignore = dirty
