@@ -10,6 +10,7 @@ return {
       "black",
       "eslint_d",
       "json-lsp",
+      "html-lsp",
       "lua-language-server",
       "node-debug2-adapter",
       "prettierd",
@@ -17,6 +18,7 @@ return {
       "tailwindcss-language-server",
       "ruff",
       "nextls",
+      "svelte-language-server",
     },
   },
   ---@param opts MasonSettings | {ensure_installed: string[]}
