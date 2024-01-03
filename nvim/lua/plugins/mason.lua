@@ -19,6 +19,13 @@ return {
       "ruff",
       "nextls",
       "svelte-language-server",
+      "gopls",
+      "templ",
+      "go-debug-adapter",
+      "gospel",
+      "goimports-reviser",
+      "gofumpt",
+      "impl",
     },
   },
   ---@param opts MasonSettings | {ensure_installed: string[]}

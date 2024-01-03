@@ -6,6 +6,15 @@ return {
     vim.list_extend(opts.ensure_installed, {
       "tsx",
       "typescript",
+      "go",
+      "gomod",
+      "gowork",
+      "gosum",
+      "json",
+      "python",
+      "terraform",
+      "yaml",
+      "html",
     })
   end,
 }
