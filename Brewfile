@@ -3,6 +3,7 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "rcmdnk/file"
 brew "gls"
+brew "pkg-config"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # GNU File, Shell, and Text utilities
