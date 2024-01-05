@@ -2,88 +2,15 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export AWS_PAGER=""
 
-# OS specific config
-case "$OSTYPE" in
-  darwin*)
-    alias ls="gls --color"
-    alias nodev="/opt/homebrew/bin/n"
-
-    # homebrew path
-    export PATH="/usr/local/sbin:${PATH}"
-    export PATH="/opt/homebrew/bin:${PATH}"
-    export PATH="/Users/$USER/miniconda3/bin:${PATH}"
-    export PATH="/opt/homebrew/opt/libpq/bin:$PATH"  #after installing pg utils
-
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$('/Users/${USER}/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-        export CONDA_AUTO_ACTIVATE_BASE=true
-    else
-        if [ -f "/Users/${USER}/miniconda3/etc/profile.d/conda.sh" ]; then
-            . "/Users/${USER}/miniconda3/etc/profile.d/conda.sh"
-        else
-            export PATH="/Users/${USER}miniconda3/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
-    # <<< conda initialize <<<
-
-    # autojump config
-
-    [[ -s /Users/n214/.autojump/etc/profile.d/autojump.sh ]] && source /Users/n214/.autojump/etc/profile.d/autojump.sh
-    autoload -U compinit && compinit -u
-
-    ######################################
-    #               go                   #
-    ######################################
-
-    export GOPATH="${HOME}/go"
-    export GOROOT="$(brew --prefix golang)/libexec"
-
-    # Google Cloud SDK.
-    if [ -f "/Users/${USER}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "/Users/${USER}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
-    if [ -f "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
-
-    # pnpm
-    export PNPM_HOME="/Users/nicolasyu-weitang/Library/pnpm"
-    case ":$PATH:" in
-      *":$PNPM_HOME:"*) ;;
-      *) export PATH="$PNPM_HOME:$PATH" ;;
-    esac
-    # pnpm end
-    # NVM 
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-    # direnv
-    eval "$(direnv hook zsh)"
-
-    # bun completions
-    [ -s "/Users/n214/.bun/_bun" ] && source "/Users/n214/.bun/_bun"
-
-    # bun
-    export BUN_INSTALL="$HOME/.bun"
-    export PATH="$BUN_INSTALL/bin:$PATH"
-
-  ;;
-  linux*)
-    alias ls="ls --color"
-
-    # Google Cloud SDK.
-    if [ -f "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
-    if [ -f "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
-  ;;
-esac
 
 # ZSH config
 # Theme
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
+fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure #load theme pure
+zstyle :prompt:pure:path color '#0087ff'
 
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
@@ -118,30 +45,6 @@ else
 fi
 
 
-# aliases
-alias nz="nvim ~/.zshrc"
-alias nn="nvim ~/.config/nvim/init.vim"
-alias nv=nvim
-alias sz="source ~/.zshrc && echo 'zshrc sourced'"
-alias d=docker
-alias k=kubectl
-alias t="tmux -2"
-alias ta="tmux -2 a"
-alias r="ranger"
-alias rg="rg --vimgrep --color ansi"
-alias sr="sudo ranger"
-alias mkd="mkdir -pv"
-alias nt="nvim ~/.tmux.conf"
-
-alias shutdown='sudo shutdown now'
-alias restart='sudo restart now'
-alias server='python3 -m http.server' # optional arg: port (defaults to 8000)
-alias kd="kubectl describe"
-alias ka="kubectl apply -f"
-alias kg="kubectl get"
-alias tf="terraform"
-alias fzfcl="export FZF_DEFAULT_COMMAND='fd .'"   # restore fzf default options ('fzf clear')
-alias fzf-="export FZF_DEFAULT_COMMAND='fd . $HOME'"   # reinstate fzf custom options ('fzf-' as in 'cd -' as in 'back to where I was')
 
 # LS_COLORS for vivid, need vivid installed
 export LS_COLORS="$(vivid -m 8-bit generate molokai)"
@@ -306,3 +209,122 @@ f() {
     cmd="$program $options $arguments"
     eval "$cmd"
 }
+
+# AWS
+aws-profile () {
+        PROFILE=$(cat ~/.aws/credentials|grep "^\["|sed "s/]$//"|sed "s/^\[//"| fzf)
+        export AWS_PROFILE=$PROFILE
+}
+
+# aliases
+alias nz="nvim ~/.zshrc"
+alias nn="nvim ~/.config/nvim/init.vim"
+alias nv=nvim
+alias sz="source ~/.zshrc && echo 'zshrc sourced'"
+alias d=docker
+alias k=kubectl
+alias t="tmux -2"
+alias ta="tmux -2 a"
+alias r="ranger"
+alias rg="rg --vimgrep --color ansi"
+alias sr="sudo ranger"
+alias mkd="mkdir -pv"
+alias nt="nvim ~/.tmux.conf"
+
+alias shutdown='sudo shutdown now'
+alias restart='sudo restart now'
+alias server='python3 -m http.server' # optional arg: port (defaults to 8000)
+alias kd="kubectl describe"
+alias ka="kubectl apply -f"
+alias kg="kubectl get"
+alias tf="terraform"
+alias fzfcl="export FZF_DEFAULT_COMMAND='fd .'"   # restore fzf default options ('fzf clear')
+alias fzf-="export FZF_DEFAULT_COMMAND='fd . $HOME'"   # reinstate fzf custom options ('fzf-' as in 'cd -' as in 'back to where I was')
+
+# OS specific config
+case "$OSTYPE" in
+  darwin*)
+    unalias ls
+    unalias ll
+    unalias la
+
+    alias ls="gls -G --color=always"
+    alias ll="gls -lh --color=always"
+    alias la="gls -lAh --color=always"
+    alias nodev="/opt/homebrew/bin/n"
+
+    # homebrew path
+    export PATH="/usr/local/sbin:${PATH}"
+    export PATH="/opt/homebrew/bin:${PATH}"
+    export PATH="/Users/$USER/miniconda3/bin:${PATH}"
+    export PATH="/opt/homebrew/opt/libpq/bin:$PATH"  #after installing pg utils
+
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/Users/${USER}/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+        export CONDA_AUTO_ACTIVATE_BASE=true
+    else
+        if [ -f "/Users/${USER}/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "/Users/${USER}/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/Users/${USER}miniconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+
+    # autojump config
+
+    [[ -s /Users/n214/.autojump/etc/profile.d/autojump.sh ]] && source /Users/n214/.autojump/etc/profile.d/autojump.sh
+    autoload -U compinit && compinit -u
+
+    ######################################
+    #               go                   #
+    ######################################
+
+    export GOPATH="${HOME}/go"
+    export GOROOT="$(brew --prefix golang)/libexec"
+
+    # Google Cloud SDK.
+    if [ -f "/Users/${USER}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "/Users/${USER}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
+    if [ -f "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "/Users/${USER}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
+
+    # pnpm
+    export PNPM_HOME="/Users/nicolasyu-weitang/Library/pnpm"
+    case ":$PATH:" in
+      *":$PNPM_HOME:"*) ;;
+      *) export PATH="$PNPM_HOME:$PATH" ;;
+    esac
+    # pnpm end
+    # NVM 
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+    # direnv
+    eval "$(direnv hook zsh)"
+
+    # bun completions
+    [ -s "/Users/n214/.bun/_bun" ] && source "/Users/n214/.bun/_bun"
+
+    # bun
+    export BUN_INSTALL="$HOME/.bun"
+    export PATH="$BUN_INSTALL/bin:$PATH"
+
+  ;;
+  linux*)
+    unalias ls
+    unalias la
+    unalias lh
+
+    alias ls="ls --color"
+    alias lh="ls --color -lh"
+    alias la="ls --color -lAh"
+
+    # Google Cloud SDK.
+    if [ -f "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
+    if [ -f "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
+  ;;
+esac
