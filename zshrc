@@ -317,11 +317,12 @@ case "$OSTYPE" in
   linux*)
     unalias ls
     unalias la
-    unalias lh
+    #unalias lh
 
     alias ls="ls --color"
     alias lh="ls --color -lh"
     alias la="ls --color -lAh"
+    alias d="podman"
 
     # Google Cloud SDK.
     if [ -f "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
