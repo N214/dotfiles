@@ -1,0 +1,159 @@
+live_config_reload = true
+#"window.dynamic_padding" = true
+#"window.dynamic_title" = true
+
+[bell]
+#animation = "EaseOutExpo"
+#color = "0xffffff"
+duration = 0
+
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[[colors.indexed_colors]]
+color = "0xdc9656"
+index = 16
+
+[[colors.indexed_colors]]
+color = "0xa16946"
+index = 17
+
+[[colors.indexed_colors]]
+color = "0x282828"
+index = 18
+
+[[colors.indexed_colors]]
+color = "0x383838"
+index = 19
+
+[[colors.indexed_colors]]
+color = "0xb8b8b8"
+index = 20
+
+[[colors.indexed_colors]]
+color = "0xe8e8e8"
+index = 21
+
+[colors.bright]
+black = "0x585858"
+blue = "0x7cafc2"
+cyan = "0x86c1b9"
+green = "0xa1b56c"
+magenta = "0xba8baf"
+red = "0xab4642"
+white = "0xf8f8f8"
+yellow = "0xf7ca88"
+
+[colors.cursor]
+cursor = "0xd8d8d8"
+text = "0x181818"
+
+[colors.normal]
+black = "0x181818"
+blue = "0x7cafc2"
+cyan = "0x86c1b9"
+green = "0xa1b56c"
+magenta = "0xba8baf"
+red = "0xab4642"
+white = "0xd8d8d8"
+yellow = "0xf7ca88"
+
+[colors.primary]
+background = "0x181818"
+foreground = "0xd8d8d8"
+
+[cursor]
+unfocused_hollow = true
+
+[cursor.style]
+shape = "Block"
+blinking = "never"
+
+[cursor.vi_mode_style]
+shape = "Block"
+
+[font]
+size = 11.0
+
+[font.normal]
+family = "FiraCodeNerdFontMono"
+style = "Regular"
+
+[[keyboard.bindings]]
+chars = "º"
+key = "Key0"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "¡"
+key = "Key1"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "€"
+key = "Key2"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "#"
+key = "Key3"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "¢"
+key = "Key4"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "∞"
+key = "Key5"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "§"
+key = "Key6"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "¶"
+key = "Key7"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "•"
+key = "Key8"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "ª"
+key = "Key9"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+
+#[mouse.hints]
+#modifiers = "Command"
+
+#[mouse.hints.launcher]
+#program = "open"
+
+[scrolling]
+history = 100000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[shell]
+program = "/usr/bin/zsh"
+
+[window]
+opacity = 0.99
+
+[window.padding]
+x = 5
+y = 10

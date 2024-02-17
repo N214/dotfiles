@@ -3,13 +3,14 @@
       relink: true
       create: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - link:
     ~/.zshrc: zshrc
     ~/.oh-my-zsh: ohmyzsh
     ~/.tmux.conf: tmux.conf
     #~/.config/nnn: config/nnn/
+    ~/.config/alacritty/alacritty.toml: config/alacritty.toml
     ~/.config/nvim:
 
 - link:
@@ -31,21 +32,21 @@
     brewfile:
       stdout: true
       stderr: true
-      include: ['tap', 'brew', 'cask']
+      include: ["tap", "brew", "cask"]
 - link:
     ~/.config/homebrew/Brewfile: Brewfile
 
 # Install packages
 - shell:
-  - description: Install packages depending on the OS type
-    command: |
-      if [ "$(uname -s)" = "Darwin" ]; then
-        brew bundle --file=Brewfile
-      elif cat /etc/os-release | grep -q "Ubuntu"; then
-        cat apt/packages.txt | xargs apt install -y
-        # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-      elif cat /etc/os-release | grep -q "Fedora"; then
-        cat dnf/packages.txt | xargs dnf install -y
-      fi
-    stdout: true
-    stdin: true
+    - description: Install packages depending on the OS type
+      command: |
+        if [ "$(uname -s)" = "Darwin" ]; then
+          brew bundle --file=Brewfile
+        elif cat /etc/os-release | grep -q "Ubuntu"; then
+          cat apt/packages.txt | xargs apt install -y
+          # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+        elif cat /etc/os-release | grep -q "Fedora"; then
+          cat dnf/packages.txt | xargs dnf install -y
+        fi
+      stdout: true
+      stdin: true
