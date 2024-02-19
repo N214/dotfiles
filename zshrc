@@ -1,5 +1,6 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/go/bin/:$PATH
 export AWS_PAGER=""
 
 
@@ -18,8 +19,6 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(
   git
-  docker
-  docker-compose
   sudo
   last-working-dir
   zsh-autosuggestions
@@ -45,9 +44,6 @@ else
 fi
 
 
-
-# LS_COLORS for vivid, need vivid installed
-export LS_COLORS="$(vivid -m 8-bit generate molokai)"
 
 
 ######################################
@@ -258,6 +254,9 @@ case "$OSTYPE" in
     export PATH="/opt/homebrew/bin:${PATH}"
     export PATH="/Users/$USER/miniconda3/bin:${PATH}"
     export PATH="/opt/homebrew/opt/libpq/bin:$PATH"  #after installing pg utils
+
+    # LS_COLORS for vivid, need vivid installed
+    export LS_COLORS="$(vivid -m 8-bit generate molokai)"
 
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
