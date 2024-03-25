@@ -1,10 +1,14 @@
 vim
 python3-neovim
+python3-venv
 fzf
 fd-find
 ripgrep
 bat
 ranger
 gcc
-golang
+curl
+wget
+zsh
+tmux
 software-properties-common
