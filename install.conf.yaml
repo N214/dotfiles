@@ -43,7 +43,7 @@
         if [ "$(uname -s)" = "Darwin" ]; then
           brew bundle --file=Brewfile
         elif cat /etc/os-release | grep -q "Ubuntu"; then
-          cat apt/packages.txt | xargs apt install -y
+          #cat apt/packages.txt | xargs apt install -y
           # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
         elif cat /etc/os-release | grep -q "Fedora"; then
           cat dnf/packages.txt | xargs dnf install -y

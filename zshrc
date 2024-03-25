@@ -321,7 +321,7 @@ case "$OSTYPE" in
     alias ls="ls --color"
     alias lh="ls --color -lh"
     alias la="ls --color -lAh"
-    alias d="podman"
+    alias d="docker"
 
     # Google Cloud SDK.
     if [ -f "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
