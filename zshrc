@@ -50,7 +50,7 @@ fi
 #               nnn                  #
 ######################################
 
-export VISUAL=ewrap
+export VISUAL=nvim
 export NNN_OPENER="/home/${USER}/.config/nnn/plugins/nuke"
 export NNN_SSHFS_OPTS='sshfs -o reconnect,idmap=user,cache_timeout=3600'
 export NNN_BMS="c:$HOME/BD/Carrefour/;h:$HOME;d:$HOME/Downloads/"
@@ -319,7 +319,7 @@ case "$OSTYPE" in
     #unalias lh
 
     #export GOPATH="${HOME}/go"
-    export GOROOT="${HOME}/go"
+    #export GOROOT="${HOME}/go"
     #export GOROOT="$(brew --prefix golang)/libexec"
 
     # direnv
@@ -330,10 +330,19 @@ case "$OSTYPE" in
     alias la="ls --color -lAh"
     alias d="docker"
 
+    # rust
+    . "$HOME/.cargo/env"
+
+    # alacritty
+    fpath+=${ZDOTDIR:-~}/.zsh_functions
+
     # Google Cloud SDK.
     if [ -f "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
     if [ -f "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
 
+    # Linux brew
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   ;;
 esac
+
 
