@@ -1,6 +1,8 @@
 vim
 python3-neovim
 python3-venv
+python3-dev 
+libhunspell-dev
 fzf
 fd-find
 ripgrep

@@ -318,6 +318,13 @@ case "$OSTYPE" in
     unalias la
     #unalias lh
 
+    #export GOPATH="${HOME}/go"
+    export GOROOT="${HOME}/go"
+    #export GOROOT="$(brew --prefix golang)/libexec"
+
+    # direnv
+    eval "$(direnv hook zsh)"
+
     alias ls="ls --color"
     alias lh="ls --color -lh"
     alias la="ls --color -lAh"
@@ -327,8 +334,6 @@ case "$OSTYPE" in
     if [ -f "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/path.zsh.inc"; fi
     if [ -f "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/Downloads/google-cloud-sdk/completion.zsh.inc"; fi
 
-    # Linux brew
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   ;;
 esac
 
